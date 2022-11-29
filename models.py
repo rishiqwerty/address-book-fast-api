@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 from database import Base
+
 
 class Address(Base):
     __tablename__ = "address"
@@ -7,5 +8,5 @@ class Address(Base):
     id = Column(Integer, primary_key=True, index=True)
     user = Column(String)
     address = Column(String)
-    longitude = Column(Integer)
-    latitude = Column(Integer)
+    longitude = Column(Float)
+    latitude = Column(Float)
