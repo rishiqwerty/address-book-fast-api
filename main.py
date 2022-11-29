@@ -63,15 +63,15 @@ This is for adding new address data
 
 
 @app.post('/create')
-async def create_address(address: Address, db: Session = Depends(get_db)):
+async def create_address(person_name: str, address: str, latitude: float, longitude: float, db: Session = Depends(get_db)):
     address_model = models.Address()
-    address_model.user = address.user
-    address_model.address = address.address
-    address_model.latitude = address.latitude
-    address_model.longitude = address.longitude
+    address_model.user = person_name
+    address_model.address = address
+    address_model.latitude = latitude
+    address_model.longitude = longitude
     db.add(address_model)
     db.commit()
-    return address
+    return f'New Address added: user:{person_name} address:{address} cordinates:{latitude, longitude}'
 
 '''
 This is for updating the address data based on address_id
@@ -79,18 +79,18 @@ This is for updating the address data based on address_id
 
 
 @app.put('/{address_id}')
-async def update_address(address_id: int, address: Address, db: Session = Depends(get_db)):
+async def update_address(address_id: int, person_name: str, address: str, latitude: float, longitude: float, db: Session = Depends(get_db)):
     address_model = db.query(models.Address).filter(
         models.Address.id == address_id).first()
     if address_model:
-        address_model.user = address.user
-        address_model.address = address.address
-        address_model.latitude = address.latitude
-        address_model.longitude = address.longitude
+        address_model.user = person_name
+        address_model.address = address
+        address_model.latitude = latitude
+        address_model.longitude = longitude
 
         db.add(address_model)
         db.commit()
-        return f'Updated!! New data: {address}'
+        return f'Updated!! New data: user:{person_name} address:{address} cordinates:{latitude, longitude}'
     else:
         return f'Address id not present in DB'
 
