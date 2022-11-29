@@ -15,6 +15,11 @@
   ```
   git clone https://github.com/rishiqwerty/address-book-fast-api.git
   ```
+- Now install the libraries mentioned in requirements.txt using pip
+  ```
+    pip install -r requirements.txt
+  ```
+
 
 **To run the server:**
 - Go to repo folder and run:
